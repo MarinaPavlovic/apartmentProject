@@ -1,0 +1,78 @@
+.card{
+    background-color: white;
+    border: 2px solid #77002e;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    width: 500px;
+    margin: 0 auto;
+
+}
+
+.card h2{
+    text-align: center;
+    color: #77002e;
+}
+
+.card table{
+    width: 500px;
+    height: 400px;
+}
+
+
+.card table th{
+    color: #77002e;
+    font-size: 1.2rem;
+}
+
+.card table input{
+    font: inherit;
+    background-color: white;
+    color: #77002e;
+    border-radius: 4px;
+    border: 1px solid #77002e;
+    text-align: left;
+    padding: 0.25rem;
+}
+
+.card button{
+    cursor: pointer;
+    font: inherit;
+    color: white;
+    background-color: #77002e;
+    border: 1px solid #77002e;
+    border-radius: 4px;
+    padding: 0.5rem 2.5rem;
+    margin-bottom: 10px;
+    margin-left: 150px;
+}
+
+
+
+.imageDiv label{
+    color: #77002e;
+    font-size: 1.2rem;
+    margin: 10px;
+}
+
+.imageDiv p{
+    margin-left: 20px;
+    color: #77002e;
+
+}
+
+.imageDiv input{
+    font: inherit;
+    background-color: white;
+    color: #77002e;
+    border-radius: 4px;
+    border: 1px solid #77002e;
+    text-align: left;
+    padding: 0.25rem;
+}
+.imageDiv button{
+    margin-left: 10px;
+    border-radius: 5px;
+    background-color: #f0dbe3;
+    border: 1px solid #77002e;
+    color:#77002e;
+}

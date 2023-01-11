@@ -1,0 +1,125 @@
+.item {
+    margin: 30px 30px;
+    font-family: Georgia, serif;
+    width: 600px;
+    display: inline-block;
+    height: 1000px;
+
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    background-color: white;
+    padding: 1rem;
+    text-align: center;
+    
+    z-index: 10;
+    position: absolute;
+    top: 2vh;
+    left: calc(50% - 20rem);
+    bottom: 2vh;
+  }
+
+
+  
+.image {
+    width: 100%;
+    overflow: hidden;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+  }
+  
+.image img {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 20%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    background-color: rgba(0,0,0,0.8);
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+  }
+  
+  .next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+  }
+  
+  .prev:hover, .next:hover {
+    background-color: white;
+    color: black;
+  }
+  
+  
+.content {
+    text-align: left;
+    padding: 5px;
+  }
+  
+.content h4 {
+    font-size: 1.25rem;
+    color: #2c292b;
+  }
+  
+.actions {
+    padding: 10px;
+    text-align: right;
+  }
+  
+.actions button {
+    font: inherit;
+    cursor: pointer;
+    color: #77002e;
+    border: 1px solid #77002e;
+    background-color: transparent;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+  }
+
+  .actions button:hover,
+  .actions button:active {
+    background-color: #ffe2ed;
+  }
+  .avDays ul{
+    list-style: none;
+  }
+  .avDays li{
+    display: inline-block;
+    margin: 5px;
+  }
+  .avDays input{
+    font: inherit;
+    background-color: #f1e1fc;
+    color: #fcb8d2;
+    border-radius: 4px;
+    border: 1px solid white;
+    width: 100%;
+    text-align: left;
+    padding: 0.25rem;
+  }
+  .avDays button{
+    font: inherit;
+    cursor: pointer;
+    color: #77002e;
+    border: 1px solid #77002e;
+    background-color: transparent;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+  }
+  .avDays button:hover,
+  .avDays button:active{
+    background-color: #ffe2ed;
+
+  }
+  
+
+
+  
