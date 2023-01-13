@@ -1,0 +1,56 @@
+.content{
+    width: 80%;
+    margin: 0 auto;
+}
+.content ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: baseline;
+}
+
+.user{
+    width: 30%;
+    height: 300px;
+    border: 1px solid #77002e ;
+    border-radius: 5px;
+    background-color: #ffe2ed;
+    color: #77002e;
+    padding: 30px;
+
+}
+.user h2{
+    color: #77002e;
+}
+
+.user button{
+    border: 1px solid #77002e;
+    color: #77002e;
+    background-color: white;
+    border-radius: 5px;
+    margin: 20px;
+    width: 80px;
+    height: 40px;
+}
+.user button:hover,
+.user button:active{
+    background-color:#8c1140 ;
+    color: #ffe2ed;
+}
+
+.reservations{
+    width: 68%;
+    height: 300px;
+    padding: 30px;
+    margin-left: 10px;
+    border: 1px solid #77002e;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+.reservations h2{
+    color: #77002e;
+
+
+}
+
