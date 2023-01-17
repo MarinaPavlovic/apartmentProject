@@ -88,6 +88,9 @@
   .actions button:active {
     background-color: #ffe2ed;
   }
+  .avDays{
+    margin-bottom: 20px;
+  }
   .avDays ul{
     list-style: none;
   }

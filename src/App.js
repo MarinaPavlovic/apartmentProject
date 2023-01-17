@@ -11,6 +11,7 @@ import ApartmentCard from "./components/apartments/ApartmentCard";
 import MyFavoritePage from "./pages/MyFavorite";
 import MyProfilePage from "./pages/MyProfile";
 import AddApartmentPage from "./pages/AddApartment";
+import MyReservationsPage from "./pages/MyReservations";
 
 function App() {
 	return (
@@ -49,7 +50,7 @@ function App() {
 				</Route>
 
 				<Route path="/myReservations">
-					<h2>My Reservations</h2>
+					<MyReservationsPage />
 				</Route>
 				<Route path="/addApartment">
 					<AddApartmentPage />

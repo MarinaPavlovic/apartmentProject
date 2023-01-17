@@ -68,6 +68,7 @@ function ApartmentItem(props) {
 			</Card>
 			{cardIsOpen && (
 				<ApartmentCard
+					id={props.id}
 					name={props.name}
 					images={props.images}
 					adres={props.adres}

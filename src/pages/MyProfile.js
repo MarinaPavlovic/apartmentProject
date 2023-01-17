@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useContext } from "react";
 import AuthContext from "../store/auth-contex";
 import classes from "./MyProfile.module.css";
-import ApartmentItemFavorite from "../components/apartments/ApartmentItemFavorite";
+import ReservApartments from "../components/apartments/ReservApartments";
 
 function MyProfilePage() {
 	const authCtx = useContext(AuthContext);
@@ -65,7 +65,15 @@ function MyProfilePage() {
 					{loadedResApartments.length === 0 ? (
 						<p>You don't have reservations yet.</p>
 					) : (
-						loadedResApartments.map((apartment) => <h2>{apartment.id}</h2>)
+						loadedResApartments.map((apartment) => (
+							<ReservApartments
+								key={apartment.key}
+								images={apartment.images}
+								startDay={apartment.startDay}
+								endDay={apartment.endDay}
+								name={apartment.name}
+							/>
+						))
 					)}
 				</li>
 			</ul>

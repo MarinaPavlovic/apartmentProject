@@ -41,7 +41,7 @@
 
 .reservations{
     width: 68%;
-    height: 300px;
+    height: inherit;
     padding: 30px;
     margin-left: 10px;
     border: 1px solid #77002e;
