@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import AuthContext from "../store/auth-contex";
-import classes from "./MyProfile.module.css";
 import ReservApartments from "../components/apartments/ReservApartments";
+import classes from "./MyReservations.module.css";
 
 function MyReservationsPage() {
 	const authCtx = useContext(AuthContext);
@@ -35,24 +35,27 @@ function MyReservationsPage() {
 	}, [userId, token]);
 
 	return (
-		<ul>
-			<li className={classes.reservations}>
-				<h2>My reservations:</h2>
-				{loadedResApartments.length === 0 ? (
-					<p>You don't have reservations yet.</p>
-				) : (
-					loadedResApartments.map((apartment) => (
-						<ReservApartments
-							key={apartment.key}
-							images={apartment.images}
-							startDay={apartment.startDay}
-							endDay={apartment.endDay}
-							name={apartment.name}
-						/>
-					))
-				)}
-			</li>
-		</ul>
+		<div className={classes.content}>
+			<ul>
+				<li className={classes.reservations}>
+					{loadedResApartments.length === 0 ? (
+						<p>You don't have reservations yet.</p>
+					) : (
+						loadedResApartments.map((apartment) => (
+							<ReservApartments
+								key={apartment.key}
+								images={apartment.images}
+								startDay={apartment.startDay}
+								endDay={apartment.endDay}
+								name={apartment.name}
+								userId={apartment.userUserId}
+								hostId={apartment.userHostId}
+							/>
+						))
+					)}
+				</li>
+			</ul>
+		</div>
 	);
 }
 export default MyReservationsPage;

@@ -19,3 +19,6 @@
 .list li img{
     width: 200px;
 }
+.content{
+    display: inline;
+}

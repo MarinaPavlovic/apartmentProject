@@ -72,6 +72,8 @@ function MyProfilePage() {
 								startDay={apartment.startDay}
 								endDay={apartment.endDay}
 								name={apartment.name}
+								userId={apartment.userUserId}
+								hostId={apartment.userHostId}
 							/>
 						))
 					)}
