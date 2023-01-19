@@ -10,6 +10,8 @@ function AddApartmentPage() {
 	const authCtx = useContext(AuthContext);
 	const inputName = useRef();
 	const inputDescription = useRef();
+	const inputCountry = useRef();
+	const inputCity = useRef();
 	const inputAddress = useRef();
 	const inputPrice = useRef();
 	const inputDestType = useRef();
@@ -25,6 +27,8 @@ function AddApartmentPage() {
 
 		const enteredName = inputName.current.value;
 		const enteredDescription = inputDescription.current.value;
+		const enteredCountry = inputCity.current.value;
+		const enteredCity = inputCity.current.value;
 		const enteredAddress = inputAddress.current.value;
 		const enteredPrice = parseInt(inputPrice.current.value);
 		const enteredDestType = inputDestType.current.value;
@@ -36,6 +40,8 @@ function AddApartmentPage() {
 					userId: authCtx.id,
 					name: enteredName,
 					description: enteredDescription,
+					country: enteredCountry,
+					city: enteredCity,
 					adres: enteredAddress,
 					pricePerNight: enteredPrice,
 					destinationType: enteredDestType,
@@ -106,12 +112,29 @@ function AddApartmentPage() {
 					</tr>
 					<tr>
 						<th>
+							<label htmlFor="country">Country:</label>
+						</th>
+						<td>
+							<input type="text" id="country" required ref={inputCountry} />
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<label htmlFor="city">City:</label>
+						</th>
+						<td>
+							<input type="text" id="city" required ref={inputCity} />
+						</td>
+					</tr>
+					<tr>
+						<th>
 							<label htmlFor="address">Address:</label>
 						</th>
 						<td>
 							<input type="text" id="adress" required ref={inputAddress} />
 						</td>
 					</tr>
+
 					<tr>
 						<th>
 							<label htmlFor="price">Price per night:</label>

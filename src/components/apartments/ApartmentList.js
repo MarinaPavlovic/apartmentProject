@@ -3,7 +3,6 @@ import ApartmentItem from "./ApartmentItem";
 import AuthContext from "../../store/auth-contex";
 import { useContext } from "react";
 import ApartmentItemHost from "./ApartmentItemHost";
-import ApartmentItemFavorite from "./ApartmentItemFavorite";
 
 function ApartmentList(props) {
 	const authCtx = useContext(AuthContext);
@@ -13,8 +12,11 @@ function ApartmentList(props) {
 		<ApartmentItem
 			key={meetup.id}
 			id={meetup.id}
+			userId={meetup.userId}
 			images={meetup.images}
 			name={meetup.name}
+			country={meetup.country}
+			city={meetup.city}
 			adres={meetup.adres}
 			description={meetup.description}
 			pricePerNight={meetup.pricePerNight}
@@ -28,6 +30,8 @@ function ApartmentList(props) {
 				id={meetup.id}
 				images={meetup.images}
 				name={meetup.name}
+				country={meetup.country}
+				city={meetup.city}
 				adres={meetup.adres}
 				description={meetup.description}
 				pricePerNight={meetup.pricePerNight}

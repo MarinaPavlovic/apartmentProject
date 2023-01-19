@@ -1,9 +1,8 @@
 import classes from "./ApartmentItem.module.css";
 import Card from "../ui/Card";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import ApartmentCard from "./ApartmentCard";
 import Backdrop from "./Beckdrop";
-import AuthContext from "../../store/auth-contex";
 
 function ApartmentItemFavorite(props) {
 	const [imageNum, setImageNum] = useState(0);
@@ -42,7 +41,9 @@ function ApartmentItemFavorite(props) {
 					<p>
 						<b>{props.name}</b>
 					</p>
-					<address>{props.adres}</address>
+					<address>
+						{props.adres + ", " + props.city + ", " + props.country}
+					</address>
 					<p>
 						<b>{props.pricePerNight}$</b>
 					</p>
@@ -59,8 +60,12 @@ function ApartmentItemFavorite(props) {
 			</Card>
 			{cardIsOpen && (
 				<ApartmentCard
+					apartmentId={props.id}
+					userId={props.userId}
 					name={props.name}
 					images={props.images}
+					country={props.country}
+					city={props.city}
 					adres={props.adres}
 					description={props.description}
 					pricePerNight={props.pricePerNight}

@@ -33,7 +33,9 @@ function ApartmentItemHost(props) {
 					<p>
 						<b>{props.name}</b>
 					</p>
-					<address>{props.adres}</address>
+					<address>
+						{props.adres + ", " + props.city + ", " + props.country}
+					</address>
 					<p>
 						<b>{props.pricePerNight}$</b>
 					</p>
@@ -48,6 +50,8 @@ function ApartmentItemHost(props) {
 					id={props.id}
 					name={props.name}
 					images={props.images}
+					country={props.country}
+					city={props.city}
 					adres={props.adres}
 					description={props.description}
 					pricePerNight={props.pricePerNight}

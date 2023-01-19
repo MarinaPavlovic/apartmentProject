@@ -1,9 +1,12 @@
 import ApartmentList from "../components/apartments/ApartmentList";
 import { useState, useEffect } from "react";
+import Filter from "../components/filter/Filter";
+import Backdrop from "../components/apartments/Beckdrop";
 
 function ApartmentPage() {
 	const [isLoading, setIsLoading] = useState(true);
 	const [loadedMeetups, setLoadedMeetups] = useState([]);
+	const [filter, setFilter] = useState(false);
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -27,6 +30,13 @@ function ApartmentPage() {
 			});
 	}, []);
 
+	function filterHandler() {
+		setFilter(true);
+	}
+	function closeFilter() {
+		setFilter(false);
+	}
+
 	if (isLoading) {
 		return (
 			<section>
@@ -36,9 +46,17 @@ function ApartmentPage() {
 	}
 
 	return (
-		<section>
-			<ApartmentList meetups={loadedMeetups} />
-		</section>
+		<div>
+			<div>
+				<button onClick={filterHandler}>Filter</button>
+			</div>
+
+			<section>
+				<ApartmentList meetups={loadedMeetups} />
+			</section>
+			{filter && <Filter />}
+			{filter && <Backdrop onCancle={closeFilter} />}
+		</div>
 	);
 }
 

@@ -8,6 +8,8 @@ function ApartmentEditCard(props) {
 	const [imageid, setImageId] = useState(0);
 	const [inputImage, setInputImage] = useState("");
 	const [name, setName] = useState(props.name);
+	const [country, setCountry] = useState(props.country);
+	const [city, setCity] = useState(props.city);
 	const [adress, setAddress] = useState(props.adres);
 	const [description, setDescription] = useState(props.description);
 	const [price, setPrice] = useState(props.pricePerNight);
@@ -37,6 +39,8 @@ function ApartmentEditCard(props) {
 				userId: props.userId,
 				name: name,
 				description: description,
+				country: country,
+				city: city,
 				adres: adress,
 				pricePerNight: price,
 				destinationType: props.destinationType,
@@ -101,6 +105,28 @@ function ApartmentEditCard(props) {
 						type="text"
 						id="name"
 						onChange={(e) => setName(e.target.value)}
+					/>
+				</div>
+				<div>
+					<h6>
+						<b>Country:</b>
+					</h6>
+					<input
+						placeholder={props.country}
+						type="text"
+						id="country"
+						onChange={(e) => setCountry(e.target.value)}
+					/>
+				</div>
+				<div>
+					<h6>
+						<b>City:</b>
+					</h6>
+					<input
+						placeholder={props.city}
+						type="text"
+						id="city"
+						onChange={(e) => setCity(e.target.value)}
 					/>
 				</div>
 

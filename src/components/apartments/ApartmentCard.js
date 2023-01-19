@@ -10,6 +10,7 @@ function ApartmentCard(props) {
 	const apartmentId = props.id;
 	const userId = authCtx.id;
 	const token = authCtx.token;
+	const hostId = props.userId;
 
 	function toFavorite() {
 		fetch("http://localhost:1313/favorite/add/favorite", {
@@ -28,10 +29,11 @@ function ApartmentCard(props) {
 		e.preventDefault();
 		const enteredStartDay = startDayInput.current.value;
 		const enteredEndDay = endDayInput.current.value;
-		fetch("http://localhost:8080/reservation/create", {
+		fetch("http://localhost:8080/reservations/create", {
 			method: "POST",
 			body: JSON.stringify({
 				userId: userId,
+				hostId: hostId,
 				apartmentId: apartmentId,
 				startDay: enteredStartDay,
 				endDay: enteredEndDay,
@@ -68,7 +70,9 @@ function ApartmentCard(props) {
 				<p>
 					<b>{props.name}</b>
 				</p>
-				<address>{props.adres}</address>
+				<address>
+					{props.adres + ", " + props.city + ", " + props.country}
+				</address>
 				<p>{props.description}</p>
 				<p>
 					<b>{props.pricePerNight}$</b>
@@ -77,7 +81,7 @@ function ApartmentCard(props) {
 
 			<div className={classes.avDays}>
 				<h3>You want to visit us?</h3>
-				<p>Check available days:</p>
+				<p>Make reservation:</p>
 				<form onSubmit={checkAvalabileDays}>
 					<ul>
 						<li>
@@ -89,7 +93,7 @@ function ApartmentCard(props) {
 							<input type="date" required ref={endDayInput} />
 						</li>
 						<li>
-							<button type="submit">Check</button>
+							<button type="submit">Confirm</button>
 						</li>
 					</ul>
 				</form>

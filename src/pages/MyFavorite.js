@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import AuthContext from "../store/auth-contex";
-import ApartmentList from "../components/apartments/ApartmentList";
 import { useEffect } from "react";
 import ApartmentItemFavorite from "../components/apartments/ApartmentItemFavorite";
 
@@ -48,8 +47,11 @@ function MyFavoritePage() {
 					<ApartmentItemFavorite
 						key={apartment.id}
 						id={apartment.id}
+						userId={apartment.userId}
 						images={apartment.images}
 						name={apartment.name}
+						country={apartment.country}
+						city={apartment.city}
 						adres={apartment.adres}
 						description={apartment.description}
 						pricePerNight={apartment.pricePerNight}

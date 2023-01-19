@@ -51,7 +51,9 @@ function ApartmentItem(props) {
 					<p>
 						<b>{props.name}</b>
 					</p>
-					<address>{props.adres}</address>
+					<address>
+						{props.adres + ", " + props.city + ", " + props.country}
+					</address>
 					<p>
 						<b>{props.pricePerNight}$</b>
 					</p>
@@ -69,8 +71,11 @@ function ApartmentItem(props) {
 			{cardIsOpen && (
 				<ApartmentCard
 					id={props.id}
+					userId={props.userId}
 					name={props.name}
 					images={props.images}
+					country={props.country}
+					city={props.city}
 					adres={props.adres}
 					description={props.description}
 					pricePerNight={props.pricePerNight}
