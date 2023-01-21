@@ -16,18 +16,8 @@ function MyFavoritePage() {
 				return response.json();
 			})
 			.then((data) => {
-				const apartments = [];
-
-				for (const key in data) {
-					const apartment = {
-						id: key,
-						...data[key],
-					};
-
-					apartments.push(apartment);
-				}
 				setIsLoading(false);
-				setLoadedApartments(apartments);
+				setLoadedApartments(data);
 			});
 	}, [userId]);
 
@@ -55,6 +45,13 @@ function MyFavoritePage() {
 						adres={apartment.adres}
 						description={apartment.description}
 						pricePerNight={apartment.pricePerNight}
+						setFavorites={(aparmtnetId) =>
+							setLoadedApartments([
+								loadedApartments.filter(
+									(aparmtent) => aparmtent.id !== aparmtnetId
+								),
+							])
+						}
 					/>
 				))
 			)}

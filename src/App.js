@@ -44,11 +44,9 @@ function App() {
 				<Route path="/myProfile">
 					<MyProfilePage />
 				</Route>
-
 				<Route path="/myApartments">
 					<MyApartmentPage />
 				</Route>
-
 				<Route path="/myReservations">
 					<MyReservationsPage />
 				</Route>

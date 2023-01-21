@@ -1,34 +1,22 @@
 import { Link, useHistory } from "react-router-dom";
 import clasess from "./MainNavigation.module.css";
 import { useContext } from "react";
-import AuthContext from "../../store/auth-contex";
-import { useState } from "react";
-import { useEffect } from "react";
+import AuthContext from "../../../store/auth-contex";
 
 const MainNavigation = () => {
-	const authCtx = useContext(AuthContext);
-	const isLoggedIn = authCtx.isLoggedIn;
-	const role = authCtx.role;
+	const user = useContext(AuthContext);
 	const history = useHistory();
-	const [visibility, setVisibility] = useState(false);
-
-	useEffect(() => {
-		if (role === "HOST") {
-			setVisibility(true);
-		}
-	}, [role]);
 
 	const logoutHandler = () => {
-		authCtx.logout();
+		user.logout();
 		history.push("/");
-		setVisibility(false);
 	};
 
 	return (
 		<header className={clasess.header}>
 			<div className={clasess.logo}>Airbnb</div>
 			<nav>
-				{visibility && (
+				{user.role === "HOST" && (
 					<ul>
 						<li>
 							<Link to="/myApartments">My Apartments</Link>
@@ -39,14 +27,12 @@ const MainNavigation = () => {
 						<li>
 							<Link to="/addApartment">Add Apartment</Link>
 						</li>
-						{isLoggedIn && (
-							<li>
-								<button onClick={logoutHandler}>Logout</button>
-							</li>
-						)}
+						<li>
+							<button onClick={logoutHandler}>Logout</button>
+						</li>
 					</ul>
 				)}
-				{!visibility && (
+				{user.role !== "HOST" && (
 					<ul>
 						<li>
 							<Link to="/">Apartments</Link>
@@ -60,7 +46,7 @@ const MainNavigation = () => {
 						<li>
 							<Link to="/cities">Cities</Link>
 						</li>
-						{isLoggedIn && (
+						{user.isLoggedIn && (
 							<ul>
 								<li>
 									<Link to="/favorites">My Favorites</Link>
@@ -75,8 +61,7 @@ const MainNavigation = () => {
 								</li>
 							</ul>
 						)}
-
-						{!isLoggedIn && (
+						{!user.isLoggedIn && (
 							<li className={clasess.login}>
 								<Link to="/auth">Login</Link>
 							</li>

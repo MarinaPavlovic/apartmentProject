@@ -1,62 +1,47 @@
 import ApartmentList from "../components/apartments/ApartmentList";
 import { useState, useEffect } from "react";
 import Filter from "../components/filter/Filter";
-import Backdrop from "../components/apartments/Beckdrop";
 
 function ApartmentPage() {
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 	const [loadedMeetups, setLoadedMeetups] = useState([]);
-	const [filter, setFilter] = useState(false);
+	const [countries, setCountries] = useState([]);
+	const [cities, setCities] = useState([]);
+	const [sort, setSort] = useState("DEFAULT");
 
 	useEffect(() => {
+		console.log(cities, countries);
 		setIsLoading(true);
 		fetch("http://localhost:1313/apartment/get/all")
 			.then((response) => {
 				return response.json();
 			})
 			.then((data) => {
-				const meetups = [];
-
-				for (const key in data) {
-					const meetup = {
-						id: key,
-						...data[key],
-					};
-
-					meetups.push(meetup);
-				}
 				setIsLoading(false);
-				setLoadedMeetups(meetups);
+				setLoadedMeetups(data);
 			});
-	}, []);
-
-	function filterHandler() {
-		setFilter(true);
-	}
-	function closeFilter() {
-		setFilter(false);
-	}
-
-	if (isLoading) {
-		return (
-			<section>
-				<p>Loading...</p>
-			</section>
-		);
-	}
+	}, [countries, cities, sort]);
 
 	return (
-		<div>
-			<div>
-				<button onClick={filterHandler}>Filter</button>
-			</div>
-
-			<section>
-				<ApartmentList meetups={loadedMeetups} />
-			</section>
-			{filter && <Filter />}
-			{filter && <Backdrop onCancle={closeFilter} />}
-		</div>
+		<>
+			{isLoading ? (
+				<section>
+					<p>Loading...</p>
+				</section>
+			) : (
+				<div className="">
+					<Filter
+						chosenCountries={countries}
+						setChosenCountries={(countries) => setCountries(countries)}
+						chosenCities={cities}
+						setChosenCities={(cities) => setCities(cities)}
+						sort={sort}
+						setSort={(sort) => setSort(sort)}
+					/>
+					<ApartmentList meetups={loadedMeetups} />
+				</div>
+			)}
+		</>
 	);
 }
 

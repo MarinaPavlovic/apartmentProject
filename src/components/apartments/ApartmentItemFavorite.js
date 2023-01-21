@@ -20,11 +20,17 @@ function ApartmentItemFavorite(props) {
 
 		fetch("http://localhost:1313/favorite/" + apartmentId, {
 			method: "DELETE",
+		}).then((response) => {
+			if (response.ok) {
+				props.setFavorites(apartmentId);
+			} else {
+				console.error("ERROR");
+			}
 		});
 	}
 
 	return (
-		<li className={classes.item}>
+		<li className={classes.item} key={props.key}>
 			<Card>
 				{props.images.length > 0 && (
 					<div className={classes.image}>
