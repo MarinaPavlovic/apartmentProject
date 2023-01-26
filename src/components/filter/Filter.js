@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import ErrorModal from "../ui/ErrorModal";
 import classes from "./Filter.module.css";
 
 function Filter(props) {
@@ -11,7 +10,6 @@ function Filter(props) {
 		setChosenCountries,
 		chosenCities,
 		setChosenCities,
-		sort,
 		setSort,
 	} = props;
 
@@ -91,36 +89,44 @@ function Filter(props) {
 				<h4>City:</h4>
 				<ul>{renderFilterCity()}</ul>
 			</div>
-			{/* <div className={classes.fiterField}>
-				<h4>Sort by price:</h4>
+			<div className={classes.fiterField}>
+				<h4>Sort by:</h4>
 				<input
-					type="checkbox"
-					value="downToUp"
-					name="downToUp"
-					id="downToUp"
-					onChange={priceFilderHandler}
+					type="radio"
+					id="sortType1"
+					name="sort"
+					value="1"
+					onChange={(e) => setSort(e.target.value)}
 				/>
-				Cheap
+				Price asending
 				<br />
 				<input
-					type="checkbox"
-					value="upToDown"
-					name="upToDown"
-					id="upToDown"
-					onChange={priceFilderHandler}
+					type="radio"
+					id="sortType2"
+					name="sort"
+					value="2"
+					onChange={(e) => setSort(e.target.value)}
 				/>
-				Expensiv
-			</div>
-			<div className={classes.fiterField}>
-				<h4>You want to see most popular apartments?</h4>
+				Price descending
+				<br />
 				<input
-					type="checkbox"
-					value="mostPopular"
-					name="mostPopular"
-					id="mostPopular"
+					type="radio"
+					id="sortType3"
+					name="sort"
+					value="3"
+					onChange={(e) => setSort(e.target.value)}
 				/>
-				Most popular
-			</div> */}
+				Most Popular
+				<br />
+				<input
+					type="radio"
+					id="sortType4"
+					name="sort"
+					value="0"
+					onChange={(e) => setSort(e.target.value)}
+				/>
+				No sort
+			</div>
 		</div>
 	);
 }

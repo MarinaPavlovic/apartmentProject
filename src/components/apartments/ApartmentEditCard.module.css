@@ -38,6 +38,7 @@
     background-color: transparent;
     padding: 0.5rem 1.5rem;
     border-radius: 4px;
+    background-color: white;
 
 }
 
@@ -90,6 +91,7 @@
     background-color: transparent;
     padding: 0.5rem 1.5rem;
     border-radius: 4px;
+    background-color: white;
 }
 
 .imageDelete button:hover,

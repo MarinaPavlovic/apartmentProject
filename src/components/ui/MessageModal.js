@@ -1,6 +1,6 @@
-import classes from "./ErrorModal.module.css";
+import classes from "./MessageModal.module.css";
 
-const ErrorModal = (props) => {
+const MessageModal = (props) => {
 	return (
 		<div className={classes.modal}>
 			<header className={classes.header}>
@@ -16,4 +16,4 @@ const ErrorModal = (props) => {
 	);
 };
 
-export default ErrorModal;
+export default MessageModal;

@@ -22,3 +22,12 @@
     color: white;
 
 }
+
+.content{
+    display: flex;
+}
+.filer{
+    width: 200px;
+}
+.apartments{
+}

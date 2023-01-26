@@ -8,35 +8,35 @@ function ApartmentList(props) {
 	const authCtx = useContext(AuthContext);
 	const role = authCtx.role;
 
-	let content = props.meetups.map((meetup) => (
+	let content = props.apartments.map((apartment) => (
 		<ApartmentItem
-			key={meetup.id}
-			id={meetup.id}
-			userId={meetup.userId}
-			images={meetup.images}
-			name={meetup.name}
-			country={meetup.country}
-			city={meetup.city}
-			adres={meetup.adres}
-			description={meetup.description}
-			pricePerNight={meetup.pricePerNight}
+			key={apartment.id}
+			id={apartment.id}
+			userId={apartment.userId}
+			images={apartment.images}
+			name={apartment.name}
+			country={apartment.country}
+			city={apartment.city}
+			adres={apartment.adres}
+			description={apartment.description}
+			pricePerNight={apartment.pricePerNight}
 		/>
 	));
 
 	if (role === "HOST") {
-		content = props.meetups.map((meetup) => (
+		content = props.apartments.map((apartment) => (
 			<ApartmentItemHost
-				key={meetup.id}
-				id={meetup.id}
-				images={meetup.images}
-				name={meetup.name}
-				country={meetup.country}
-				city={meetup.city}
-				adres={meetup.adres}
-				description={meetup.description}
-				pricePerNight={meetup.pricePerNight}
-				destinationType={meetup.destinationType}
-				userId={meetup.userId}
+				key={apartment.id}
+				id={apartment.id}
+				images={apartment.images}
+				name={apartment.name}
+				country={apartment.country}
+				city={apartment.city}
+				adres={apartment.adres}
+				description={apartment.description}
+				pricePerNight={apartment.pricePerNight}
+				destinationType={apartment.destinationType}
+				userId={apartment.userId}
 			/>
 		));
 	}

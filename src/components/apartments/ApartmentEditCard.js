@@ -1,12 +1,12 @@
 import classes from "./ApartmentEditCard.module.css";
-import { useState } from "react";
-import ErrorModal from "../ui/ErrorModal";
+import { useRef, useState } from "react";
+import MessageModal from "../ui/MessageModal";
 import Backdrop from "./Beckdrop";
 import { useHistory } from "react-router-dom";
 
 function ApartmentEditCard(props) {
-	const [imageid, setImageId] = useState(0);
-	const [inputImage, setInputImage] = useState("");
+	const [propsImages, setPropsImages] = useState(props.images);
+	const [images, setImages] = useState([]);
 	const [name, setName] = useState(props.name);
 	const [country, setCountry] = useState(props.country);
 	const [city, setCity] = useState(props.city);
@@ -15,22 +15,25 @@ function ApartmentEditCard(props) {
 	const [price, setPrice] = useState(props.pricePerNight);
 	const [errorCard, setErrorCard] = useState(false);
 	const history = useHistory();
+	const inputImage = useRef();
 
-	var uploadImages = [];
-	const deleteImgHandler = () => {
-		fetch("http://localhost:1313/apartmentImages/delete/" + imageid);
+	const deleteImgHandler = (img) => {
+		const imgId = img.id;
+
+		let imageList = [...propsImages];
+		imageList = imageList.filter((image) => image.id !== imgId);
+		setPropsImages(imageList);
+		fetch("http://localhost:1313/apartmentImages/delete/" + imgId);
 	};
 
-	const imageList = [];
-	function uploadImageHandler(event) {
+	const uploadImageHandler = (event) => {
 		event.preventDefault();
-
-		if (inputImage !== "") {
-			imageList.push(inputImage);
-			uploadImages.push(inputImage);
-		}
-		return imageList;
-	}
+		let imageList = [...images];
+		const enteredImage = inputImage.current.value;
+		imageList = [...imageList, enteredImage];
+		setImages(imageList);
+		console.log(images);
+	};
 	const editHandler = () => {
 		fetch("http://localhost:1313/apartment/edit", {
 			method: "POST",
@@ -44,16 +47,16 @@ function ApartmentEditCard(props) {
 				adres: adress,
 				pricePerNight: price,
 				destinationType: props.destinationType,
-				images: imageList,
+				images: images,
 			}),
 			headers: {
 				"Content-Type": "application/json",
 			},
-		}).then((res) => {
-			if (res.status >= 400) {
-				setErrorCard(true);
-			} else {
+		}).then((response) => {
+			if (response.ok) {
 				history.push("/myApartments");
+			} else {
+				setErrorCard(true);
 			}
 		});
 	};
@@ -64,16 +67,15 @@ function ApartmentEditCard(props) {
 	return (
 		<div className={classes.item}>
 			<h2>Edit Apartment</h2>
-			{props.images.length > 0 && (
+			{propsImages.length > 0 && (
 				<div className={classes.imageDelete}>
 					<ul>
-						{props.images.map((img) => (
-							<li>
+						{propsImages.map((img) => (
+							<li key={img.id}>
 								<img src={img.imageURL} alt={props.name} />
 								<button
 									onClick={() => {
-										setImageId(img.id);
-										deleteImgHandler();
+										deleteImgHandler(img);
 									}}
 								>
 									Delete
@@ -83,17 +85,34 @@ function ApartmentEditCard(props) {
 					</ul>
 				</div>
 			)}
-
+			<div className={classes.imageDelete}>
+				{images.length > 0 && (
+					<ul>
+						{images.map((img) => (
+							<>
+								<li>
+									<img src={img} alt="can't load" />
+									<button
+										onClick={() => {
+											let imageList = [...images];
+											imageList = imageList.filter((image) => image !== img);
+											setImages(imageList);
+										}}
+									>
+										Delete
+									</button>
+								</li>
+							</>
+						))}
+					</ul>
+				)}
+			</div>
 			<div className={classes.imageDiv}>
-				<label htmlFor="images">Image URL:</label>
-				<input
-					type="url"
-					id="images"
-					required
-					onChange={(e) => setInputImage(e.target.value)}
-				/>
-				<button onClick={uploadImageHandler}>Add Image</button>
-				<p>You add {imageList.length} image.</p>
+				<form onSubmit={uploadImageHandler}>
+					<label htmlFor="images">Image URL: </label>
+					<input type="url" id="images" required ref={inputImage} />
+					<button type="submit">Add Image</button>
+				</form>
 			</div>
 			<div className={classes.content}>
 				<div>
@@ -175,7 +194,7 @@ function ApartmentEditCard(props) {
 			</div>
 
 			{errorCard && (
-				<ErrorModal
+				<MessageModal
 					title="Edit faild"
 					message="Something went wrong, check input values."
 					onCancle={closeError}

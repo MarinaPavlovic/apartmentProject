@@ -4,11 +4,12 @@ import { useContext, useState } from "react";
 import ApartmentCard from "./ApartmentCard";
 import Backdrop from "./Beckdrop";
 import AuthContext from "../../store/auth-contex";
+import MessageModal from "../ui/MessageModal";
 
 function ApartmentItem(props) {
-	const authCtx = useContext(AuthContext);
+	const user = useContext(AuthContext);
 	const [imageNum, setImageNum] = useState(0);
-
+	const [notification, setNotification] = useState(false);
 	const [cardIsOpen, setCardIsOpen] = useState(false);
 	function moreHandler() {
 		setCardIsOpen(true);
@@ -16,10 +17,13 @@ function ApartmentItem(props) {
 	function closeCard() {
 		setCardIsOpen(false);
 	}
+	function closeMessage() {
+		setNotification(false);
+	}
 
 	function toFavorite() {
 		const apartmentId = props.id;
-		const userId = authCtx.id;
+		const userId = user.id;
 
 		fetch("http://localhost:1313/favorite/add/favorite", {
 			method: "POST",
@@ -30,6 +34,10 @@ function ApartmentItem(props) {
 			headers: {
 				"Content-Type": "application/json",
 			},
+		}).then((response) => {
+			if (response.ok) {
+				setNotification(true);
+			}
 		});
 	}
 
@@ -63,9 +71,19 @@ function ApartmentItem(props) {
 					<div className={classes.actions}>
 						<button onClick={moreHandler}>More</button>
 					</div>
-					<div className={classes.actions}>
-						<button onClick={toFavorite}>To Favorites</button>
-					</div>
+					{user.isLoggedIn && (
+						<div className={classes.actions}>
+							<button onClick={toFavorite}>To Favorites</button>
+						</div>
+					)}
+					{notification && (
+						<MessageModal
+							title={"Favorite"}
+							message={"You add apartment to favorites."}
+							onCancle={closeMessage}
+						/>
+					)}
+					{notification && <Backdrop onCancle={closeMessage} />}
 				</div>
 			</Card>
 			{cardIsOpen && (

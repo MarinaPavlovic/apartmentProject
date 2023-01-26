@@ -1,20 +1,14 @@
 .content{
-    margin: 30px 30px;
     font-family: Georgia, serif;
-    width: 600px;
+    width: 250px;
     display: inline-block;
-    height: 1000px;
+    height: 650px;
 
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
     border-radius: 6px;
     background-color: white;
     padding: 1rem;
     color: #77002e;
-    z-index: 10;
-    position: absolute;
-    top: 2vh;
-    left: calc(50% - 20rem);
-    bottom: 2vh;
 }
 .content ul{
     list-style: none;

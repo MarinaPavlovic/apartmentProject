@@ -58,7 +58,6 @@ function MyProfilePage() {
 					<h2>{username}</h2>
 					<h2>{fullName}</h2>
 					<h4>{email}</h4>
-					<button>Edit</button>
 				</li>
 				<li className={classes.reservations}>
 					<h2>My reservations:</h2>
@@ -74,6 +73,11 @@ function MyProfilePage() {
 								name={apartment.name}
 								userId={apartment.userUserId}
 								hostId={apartment.userHostId}
+								totalDays={apartment.totalDays}
+								totalPrice={apartment.totalPrice}
+								country={apartment.country}
+								city={apartment.city}
+								address={apartment.adres}
 							/>
 						))
 					)}

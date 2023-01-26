@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import AuthContext from "../../store/auth-contex";
 
 import classes from "./AuthForm.module.css";
-import ErrorModal from "../ui/ErrorModal";
+import MessageModal from "../ui/MessageModal";
 import Backdrop from "../apartments/Beckdrop";
 
 const AuthForm = () => {
@@ -90,7 +90,7 @@ const AuthForm = () => {
 				</form>
 			</section>
 			{errorCard && (
-				<ErrorModal
+				<MessageModal
 					title="Login Faild"
 					message="Check username or password."
 					onCancle={closeError}

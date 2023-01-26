@@ -1,7 +1,7 @@
 import classes from "./AuthForm.module.css";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import ErrorModal from "../ui/ErrorModal";
+import MessageModal from "../ui/MessageModal";
 import Backdrop from "../apartments/Beckdrop";
 
 const Registration = () => {
@@ -111,7 +111,7 @@ const Registration = () => {
 				</form>
 			</section>
 			{errorCard && (
-				<ErrorModal
+				<MessageModal
 					title="Registration Faild"
 					message="Try diferent username or check if you already have an account."
 					onCancle={closeError}

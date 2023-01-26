@@ -3,7 +3,7 @@ import { useContext } from "react";
 import AuthContext from "../store/auth-contex";
 import classes from "./AddApartment.module.css";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import ErrorModal from "../components/ui/ErrorModal";
+import MessageModal from "../components/ui/MessageModal";
 import Backdrop from "../components/apartments/Beckdrop";
 
 function AddApartmentPage() {
@@ -14,9 +14,10 @@ function AddApartmentPage() {
 	const inputCity = useRef();
 	const inputAddress = useRef();
 	const inputPrice = useRef();
-	const inputDestType = useRef();
 	const inputImage = useRef();
+	const [destination, setDestination] = useState(undefined);
 	const [errorCard, setErrorCard] = useState(false);
+	const [images, setImages] = useState([]);
 
 	function closeError() {
 		setErrorCard(false);
@@ -31,9 +32,8 @@ function AddApartmentPage() {
 		const enteredCity = inputCity.current.value;
 		const enteredAddress = inputAddress.current.value;
 		const enteredPrice = parseInt(inputPrice.current.value);
-		const enteredDestType = inputDestType.current.value;
 
-		if (imageList.length !== 0) {
+		if (images.length !== 0) {
 			fetch("http://localhost:1313/apartment/create", {
 				method: "POST",
 				body: JSON.stringify({
@@ -44,8 +44,8 @@ function AddApartmentPage() {
 					city: enteredCity,
 					adres: enteredAddress,
 					pricePerNight: enteredPrice,
-					destinationType: enteredDestType,
-					images: imageList,
+					destinationType: destination,
+					images: images,
 				}),
 				headers: {
 					"Content-Type": "application/json",
@@ -60,103 +60,106 @@ function AddApartmentPage() {
 		}
 	};
 
-	const imageList = [];
-
-	function uploadImageHandler(event) {
+	const uploadImageHandler = (event) => {
 		event.preventDefault();
+		let imageList = [...images];
 		const enteredImage = inputImage.current.value;
-
-		if (enteredImage !== "") {
-			imageList.push(enteredImage);
-		}
-		return imageList;
-	}
-
-	var imageCounter = imageList.length;
+		imageList = [...imageList, enteredImage];
+		setImages(imageList);
+		console.log(images);
+	};
 
 	return (
 		<div className={classes.card}>
-			<h2>Add new apartment</h2>
+			<div className={classes.content}>
+				<div className={classes.imageDiv}>
+					{images.length > 0 && (
+						<ul>
+							{images.map((img) => (
+								<>
+									<li>
+										<img src={img} alt="can't load" />
+										<button
+											onClick={() => {
+												let imageList = [...images];
+												imageList = imageList.filter((image) => image !== img);
+												setImages(imageList);
+											}}
+										>
+											Delete
+										</button>
+									</li>
+								</>
+							))}
+						</ul>
+					)}
+				</div>
 
-			<div className={classes.imageDiv}>
 				<form onSubmit={uploadImageHandler}>
-					<label htmlFor="images">Image URL:</label>
+					<label htmlFor="images">Image URL: </label>
 					<input type="url" id="images" required ref={inputImage} />
-					<button>Add Image</button>
-					<p>You add {imageCounter} image.</p>
+					<button type="submit">Add Image</button>
+				</form>
+
+				<form onSubmit={submitHandler}>
+					<label htmlFor="name">Apartment Name: </label>
+					<input type="text" id="name" required ref={inputName} />
+					<br />
+					<label htmlFor="description">Description:</label>
+					<input
+						type="textarea"
+						id="description"
+						required
+						ref={inputDescription}
+					/>
+					<br />
+					<label htmlFor="country">Country:</label>
+					<input type="text" id="country" required ref={inputCountry} />
+					<br />
+					<label htmlFor="city">City:</label>
+					<input type="text" id="city" required ref={inputCity} />
+					<br />
+					<label htmlFor="address">Address:</label>
+					<input type="text" id="adress" required ref={inputAddress} />
+					<br />
+					<label htmlFor="price">Price per night:</label>
+					<input type="text" id="price" required ref={inputPrice} />
+					<br />
+					<label htmlFor="destType">Destination Type:</label>
+					<br />
+					<input
+						type="radio"
+						name="destination"
+						id="destType1"
+						value="BEACH"
+						onChange={(e) => setDestination(e.target.value)}
+					/>{" "}
+					Apartment on beach
+					<br />
+					<input
+						type="radio"
+						name="destination"
+						id="destType2"
+						value="CITIES"
+						onChange={(e) => setDestination(e.target.value)}
+					/>{" "}
+					Apartment in city
+					<br />
+					<input
+						type="radio"
+						name="destination"
+						id="destType3"
+						value="SKIING"
+						onChange={(e) => setDestination(e.target.value)}
+					/>{" "}
+					Apartment on mountin
+					<br />
+					<br />
+					<button>Add Apartment</button>
 				</form>
 			</div>
-
-			<form onSubmit={submitHandler}>
-				<table>
-					<tr>
-						<th>
-							<label htmlFor="name">Apartment Name:</label>
-						</th>
-						<td>
-							<input type="text" id="name" required ref={inputName} />
-						</td>
-					</tr>
-					<tr>
-						<th>
-							<label htmlFor="description">Description:</label>
-						</th>
-						<td>
-							<input
-								type="textarea"
-								id="description"
-								required
-								ref={inputDescription}
-							/>
-						</td>
-					</tr>
-					<tr>
-						<th>
-							<label htmlFor="country">Country:</label>
-						</th>
-						<td>
-							<input type="text" id="country" required ref={inputCountry} />
-						</td>
-					</tr>
-					<tr>
-						<th>
-							<label htmlFor="city">City:</label>
-						</th>
-						<td>
-							<input type="text" id="city" required ref={inputCity} />
-						</td>
-					</tr>
-					<tr>
-						<th>
-							<label htmlFor="address">Address:</label>
-						</th>
-						<td>
-							<input type="text" id="adress" required ref={inputAddress} />
-						</td>
-					</tr>
-
-					<tr>
-						<th>
-							<label htmlFor="price">Price per night:</label>
-						</th>
-						<td>
-							<input type="text" id="price" required ref={inputPrice} />
-						</td>
-					</tr>
-					<tr>
-						<th>
-							<label htmlFor="destType">Destination Type:</label>
-						</th>
-						<td>
-							<input type="text" id="destType" required ref={inputDestType} />
-						</td>
-					</tr>
-				</table>
-
-				<button>Add Apartment</button>
-			</form>
 			{errorCard && (
-				<ErrorModal
+				<MessageModal
 					title="Faild to create new apartment"
 					message="Check if the input values is correct."
 					onCancle={closeError}

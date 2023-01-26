@@ -1,8 +1,5 @@
 import { Route, Switch } from "react-router-dom";
 import ApartmentPage from "./pages/Apartments";
-import BeachPage from "./pages/Beach";
-import SkiingPage from "./pages/Skiing";
-import CitiesPage from "./pages/Cities";
 import AuthForm from "./components/auth/AuthForm";
 import MyApartmentPage from "./pages/MyApartments";
 import Layout from "./components/layout/Layout";
@@ -18,16 +15,16 @@ function App() {
 		<Layout>
 			<Switch>
 				<Route path="/" exact>
-					<ApartmentPage />
+					<ApartmentPage destinationType="ALL" />
 				</Route>
 				<Route path="/beach">
-					<BeachPage />
+					<ApartmentPage destinationType="BEACH" />
 				</Route>
 				<Route path="/skiing">
-					<SkiingPage />
+					<ApartmentPage destinationType="SKIING" />
 				</Route>
 				<Route path="/cities">
-					<CitiesPage />
+					<ApartmentPage destinationType="CITIES" />
 				</Route>
 				<Route path="/favorites">
 					<MyFavoritePage />

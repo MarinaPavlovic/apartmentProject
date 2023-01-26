@@ -50,6 +50,11 @@ function MyReservationsPage() {
 								name={apartment.name}
 								userId={apartment.userUserId}
 								hostId={apartment.userHostId}
+								totalDays={apartment.totalDays}
+								totalPrice={apartment.totalPrice}
+								country={apartment.country}
+								city={apartment.city}
+								address={apartment.adres}
 							/>
 						))
 					)}

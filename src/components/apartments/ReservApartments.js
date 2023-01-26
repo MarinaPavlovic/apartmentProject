@@ -26,35 +26,43 @@ function ReservApartments(props) {
 		});
 
 	return (
-		<div className={classes.content}>
-			<ul>
-				<li className={classes.reservation}>
-					<h3>{props.name}</h3>
-					<ul className={classes.list}>
-						<li>
-							<img src={props.images[0]} alt={props.name} />
-						</li>
-						<li>
-							<h4>Start Day: </h4>
-							<p>{date.toLocaleDateString("en-US")}</p>
-							<h4>End Day: </h4>
-							<p>{dateEnd.toLocaleDateString("en-US")}</p>
-							{authCtx.role === "HOST" && (
-								<div>
-									<h4>User:</h4>
-									<p>{username}</p>
-								</div>
-							)}
-							{authCtx.role === "USER" && (
-								<div>
-									<h4>Host:</h4>
-									<p>{username}</p>
-								</div>
-							)}
-						</li>
-					</ul>
-				</li>
-			</ul>
+		<div className={classes.component}>
+			<h3>{props.name}</h3>
+			<div className={classes.content}>
+				<div className={classes.image}>
+					<img src={props.images[0]} alt={props.name} />
+				</div>
+				<div className={classes.informations}>
+					<p>
+						{authCtx.role === "USER" ? (
+							<>You make reserevation in apartment </>
+						) : (
+							<>You have reserevation in apartment </>
+						)}
+						<b>{props.name}</b> address{" "}
+						<b>
+							{props.address},{props.city},{props.country}
+						</b>
+						.
+						<br />
+						From <b>{props.startDay}</b> to <b>{props.endDay}</b> which is total{" "}
+						<b>{props.totalDays}</b> days.
+						<br />
+						{authCtx.role === "HOST" && (
+							<>
+								User name: <b>{username}</b>
+							</>
+						)}
+						{authCtx.role === "USER" && (
+							<>
+								Host name: <b>{username}</b>
+							</>
+						)}
+						<br />
+						Total price: <b>{props.totalPrice}</b>
+					</p>
+				</div>
+			</div>
 		</div>
 	);
 }

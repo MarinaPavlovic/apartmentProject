@@ -3,27 +3,14 @@ import { useState, useContext, useRef } from "react";
 import AuthContext from "../../store/auth-contex";
 
 function ApartmentCard(props) {
-	const authCtx = useContext(AuthContext);
+	const user = useContext(AuthContext);
 	const [imageNum, setImageNum] = useState(0);
 	const startDayInput = useRef();
 	const endDayInput = useRef();
 	const apartmentId = props.id;
-	const userId = authCtx.id;
-	const token = authCtx.token;
+	const userId = user.id;
+	const token = user.token;
 	const hostId = props.userId;
-
-	function toFavorite() {
-		fetch("http://localhost:1313/favorite/add/favorite", {
-			method: "POST",
-			body: JSON.stringify({
-				apartmentId: apartmentId,
-				userId: userId,
-			}),
-			headers: {
-				"Content-Type": "application/json",
-			},
-		});
-	}
 
 	const checkAvalabileDays = (e) => {
 		e.preventDefault();
@@ -99,9 +86,6 @@ function ApartmentCard(props) {
 				</form>
 			</div>
 
-			<div className={classes.actions}>
-				<button onClick={toFavorite}>To Favorites</button>
-			</div>
 			<div className={classes.actions}>
 				<button onClick={props.onCancle}>Close</button>
 			</div>

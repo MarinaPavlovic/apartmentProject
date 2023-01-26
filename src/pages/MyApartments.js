@@ -4,37 +4,41 @@ import ApartmentList from "../components/apartments/ApartmentList";
 import { useEffect } from "react";
 
 function MyApartmentPage() {
-	const [loadedMeetups, setLoadedMeetups] = useState([]);
+	const [loadedApartments, setLoadedApartments] = useState([]);
 	const authCtx = useContext(AuthContext);
 	const hostid = authCtx.id;
+	const [reload, setReload] = useState(true);
 
 	useEffect(() => {
-		fetch("http://localhost:1313/apartment/get/host/apartments/" + hostid)
-			.then((response) => {
-				return response.json();
-			})
-			.then((data) => {
-				const meetups = [];
+		if (reload) {
+			fetch("http://localhost:1313/apartment/get/host/apartments/" + hostid)
+				.then((response) => {
+					return response.json();
+				})
+				.then((data) => {
+					const apartments = [];
 
-				for (const key in data) {
-					const meetup = {
-						id: key,
-						...data[key],
-					};
+					for (const key in data) {
+						const apartment = {
+							id: key,
+							...data[key],
+						};
 
-					meetups.push(meetup);
-				}
+						apartments.push(apartment);
+					}
 
-				setLoadedMeetups(meetups);
-			});
-	}, [hostid]);
+					setLoadedApartments(apartments);
+				});
+			setReload(false);
+		}
+	}, [hostid, reload]);
 
 	return (
 		<section>
-			{loadedMeetups.length === 0 ? (
+			{loadedApartments.length === 0 ? (
 				<p>You don't have apartments yet.</p>
 			) : (
-				<ApartmentList meetups={loadedMeetups} />
+				<ApartmentList apartments={loadedApartments} />
 			)}
 		</section>
 	);

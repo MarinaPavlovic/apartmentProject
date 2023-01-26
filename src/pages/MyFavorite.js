@@ -45,13 +45,13 @@ function MyFavoritePage() {
 						adres={apartment.adres}
 						description={apartment.description}
 						pricePerNight={apartment.pricePerNight}
-						setFavorites={(aparmtnetId) =>
-							setLoadedApartments([
-								loadedApartments.filter(
-									(aparmtent) => aparmtent.id !== aparmtnetId
-								),
-							])
-						}
+						loadedUser={userId}
+						setFavorites={(aparmtnetIdDelete) => {
+							loadedApartments.filter(
+								(apartment) => apartment.aparmtnetId !== aparmtnetIdDelete
+							);
+							setLoadedApartments(loadedApartments);
+						}}
 					/>
 				))
 			)}

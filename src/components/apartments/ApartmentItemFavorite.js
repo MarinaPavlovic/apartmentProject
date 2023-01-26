@@ -17,9 +17,17 @@ function ApartmentItemFavorite(props) {
 
 	function deleteHandler() {
 		const apartmentId = props.id;
+		const logUserId = props.loadedUser;
 
-		fetch("http://localhost:1313/favorite/" + apartmentId, {
-			method: "DELETE",
+		fetch("http://localhost:1313/favorite/delete", {
+			method: "POST",
+			body: JSON.stringify({
+				userId: logUserId,
+				apartmentId: apartmentId,
+			}),
+			headers: {
+				"Content-Type": "application/json",
+			},
 		}).then((response) => {
 			if (response.ok) {
 				props.setFavorites(apartmentId);
@@ -30,7 +38,7 @@ function ApartmentItemFavorite(props) {
 	}
 
 	return (
-		<li className={classes.item} key={props.key}>
+		<li className={classes.item} key={props.apartmentId}>
 			<Card>
 				{props.images.length > 0 && (
 					<div className={classes.image}>
