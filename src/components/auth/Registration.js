@@ -13,6 +13,7 @@ const Registration = () => {
 	const [role, setRole] = useState(undefined);
 	const [isLoading, setIsLoading] = useState(false);
 	const [errorCard, setErrorCard] = useState(false);
+	const [message, setMessage] = useState(false);
 
 	const submitHandler = (event) => {
 		event.preventDefault();
@@ -40,16 +41,23 @@ const Registration = () => {
 			headers: {
 				"Content-Type": "application/json",
 			},
-		}).then((res) => {
-			setIsLoading(false);
-			if (res.status >= 400) {
-				setErrorCard(true);
-			}
-		});
+		})
+			.then((res) => {
+				setIsLoading(false);
+				if (res.status >= 400) {
+					setErrorCard(true);
+				} else {
+					setMessage(true);
+				}
+			})
+			.then((data) => {});
 	};
 
 	function closeError() {
 		setErrorCard(false);
+	}
+	function closeMessage() {
+		setMessage(false);
 	}
 
 	return (
@@ -118,6 +126,14 @@ const Registration = () => {
 				/>
 			)}
 			{errorCard && <Backdrop onCancle={closeError} />}
+			{message && (
+				<MessageModal
+					title="Registration"
+					message="You crate a new profile, you can now log in."
+					onCancle={closeMessage}
+				/>
+			)}
+			{message && <Backdrop onCancle={closeMessage} />}
 		</div>
 	);
 };

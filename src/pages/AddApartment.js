@@ -18,9 +18,13 @@ function AddApartmentPage() {
 	const [destination, setDestination] = useState(undefined);
 	const [errorCard, setErrorCard] = useState(false);
 	const [images, setImages] = useState([]);
+	const [message, setMessage] = useState(false);
 
 	function closeError() {
 		setErrorCard(false);
+	}
+	function closeMessage() {
+		setMessage(false);
 	}
 
 	const submitHandler = (event) => {
@@ -53,6 +57,8 @@ function AddApartmentPage() {
 			}).then((res) => {
 				if (res.status >= 400) {
 					setErrorCard(true);
+				} else {
+					setMessage(true);
 				}
 			});
 		} else {
@@ -166,6 +172,14 @@ function AddApartmentPage() {
 				/>
 			)}
 			{errorCard && <Backdrop onCancle={closeError} />}
+			{message && (
+				<MessageModal
+					title="Add Apartment"
+					message="You add new apartment."
+					onCancle={closeMessage}
+				/>
+			)}
+			{message && <Backdrop onCancle={closeMessage} />}
 		</div>
 	);
 }

@@ -14,7 +14,6 @@ function ApartmentEditCard(props) {
 	const [description, setDescription] = useState(props.description);
 	const [price, setPrice] = useState(props.pricePerNight);
 	const [errorCard, setErrorCard] = useState(false);
-	const history = useHistory();
 	const inputImage = useRef();
 
 	const deleteImgHandler = (img) => {
@@ -52,18 +51,18 @@ function ApartmentEditCard(props) {
 			headers: {
 				"Content-Type": "application/json",
 			},
-		}).then((response) => {
-			if (response.ok) {
-				history.push("/myApartments");
-			} else {
+		}).then((res) => {
+			if (res.status >= 400) {
 				setErrorCard(true);
 			}
+			return res.json();
 		});
 	};
 
 	function closeError() {
 		setErrorCard(false);
 	}
+
 	return (
 		<div className={classes.item}>
 			<h2>Edit Apartment</h2>

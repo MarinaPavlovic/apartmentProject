@@ -8,7 +8,6 @@ import ApartmentCard from "./components/apartments/ApartmentCard";
 import MyFavoritePage from "./pages/MyFavorite";
 import MyProfilePage from "./pages/MyProfile";
 import AddApartmentPage from "./pages/AddApartment";
-import MyReservationsPage from "./pages/MyReservations";
 
 function App() {
 	return (
@@ -45,7 +44,7 @@ function App() {
 					<MyApartmentPage />
 				</Route>
 				<Route path="/myReservations">
-					<MyReservationsPage />
+					<MyProfilePage />
 				</Route>
 				<Route path="/addApartment">
 					<AddApartmentPage />

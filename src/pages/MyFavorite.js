@@ -28,6 +28,7 @@ function MyFavoritePage() {
 			</section>
 		);
 	}
+
 	return (
 		<section>
 			{loadedApartments.length === 0 ? (
@@ -46,12 +47,6 @@ function MyFavoritePage() {
 						description={apartment.description}
 						pricePerNight={apartment.pricePerNight}
 						loadedUser={userId}
-						setFavorites={(aparmtnetIdDelete) => {
-							loadedApartments.filter(
-								(apartment) => apartment.aparmtnetId !== aparmtnetIdDelete
-							);
-							setLoadedApartments(loadedApartments);
-						}}
 					/>
 				))
 			)}

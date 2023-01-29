@@ -1,6 +1,8 @@
 import classes from "./ApartmentCard.module.css";
 import { useState, useContext, useRef } from "react";
 import AuthContext from "../../store/auth-contex";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function ApartmentCard(props) {
 	const user = useContext(AuthContext);
@@ -85,7 +87,6 @@ function ApartmentCard(props) {
 					</ul>
 				</form>
 			</div>
-
 			<div className={classes.actions}>
 				<button onClick={props.onCancle}>Close</button>
 			</div>

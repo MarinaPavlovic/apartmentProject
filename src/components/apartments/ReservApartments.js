@@ -1,13 +1,16 @@
 import classes from "./ReservApartments.module.css";
 import AuthContext from "../../store/auth-contex";
 import { useContext, useState } from "react";
+import DeleteCard from "../ui/DeleteCard";
 
 function ReservApartments(props) {
-	const date = new Date(props.startDay);
-	const dateEnd = new Date(props.endDay);
 	const authCtx = useContext(AuthContext);
+	const [deleteCard, setDeleteCard] = useState(false);
+	const token = authCtx.token;
+
 	var url = "";
 	const [username, setUsername] = useState("");
+	const reservationId = props.reservationId;
 	if (authCtx.role === "HOST") {
 		url = "http://localhost:8080/user/" + props.userId;
 	} else {
@@ -19,12 +22,30 @@ function ReservApartments(props) {
 		},
 	})
 		.then((response) => {
-			return response.json();
+			if (response.status < 400) {
+				return response.json();
+			} else {
+				setUsername("User delete profile.");
+			}
 		})
 		.then((data) => {
 			setUsername(data.username);
 		});
 
+	function closeDeleteCard() {
+		setDeleteCard(false);
+	}
+
+	function deleteReservation() {
+		fetch("http://localhost:8080/reservations/" + reservationId, {
+			method: "DELETE",
+			headers: { Authorization: "Bearer " + token },
+		}).then((res) => {
+			if (res.status < 400) {
+				setDeleteCard(false);
+			}
+		});
+	}
 	return (
 		<div className={classes.component}>
 			<h3>{props.name}</h3>
@@ -61,8 +82,29 @@ function ReservApartments(props) {
 						<br />
 						Total price: <b>{props.totalPrice}</b>
 					</p>
+					{authCtx.role === "USER" && (
+						<div>
+							<button className={classes.editButton}>Edit</button>
+							<button
+								onClick={() => {
+									setDeleteCard(true);
+								}}
+								className={classes.deleteButton}
+							>
+								Delete
+							</button>
+						</div>
+					)}
 				</div>
 			</div>
+			{deleteCard && (
+				<DeleteCard
+					title="Delete"
+					message="Are you sure you want to delete reservation?."
+					onCancle={closeDeleteCard}
+					onDelete={deleteReservation}
+				/>
+			)}
 		</div>
 	);
 }

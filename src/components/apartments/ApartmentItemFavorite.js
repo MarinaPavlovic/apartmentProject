@@ -30,7 +30,6 @@ function ApartmentItemFavorite(props) {
 			},
 		}).then((response) => {
 			if (response.ok) {
-				props.setFavorites(apartmentId);
 			} else {
 				console.error("ERROR");
 			}

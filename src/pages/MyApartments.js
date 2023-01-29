@@ -7,31 +7,27 @@ function MyApartmentPage() {
 	const [loadedApartments, setLoadedApartments] = useState([]);
 	const authCtx = useContext(AuthContext);
 	const hostid = authCtx.id;
-	const [reload, setReload] = useState(true);
 
 	useEffect(() => {
-		if (reload) {
-			fetch("http://localhost:1313/apartment/get/host/apartments/" + hostid)
-				.then((response) => {
-					return response.json();
-				})
-				.then((data) => {
-					const apartments = [];
+		fetch("http://localhost:1313/apartment/get/host/apartments/" + hostid)
+			.then((response) => {
+				return response.json();
+			})
+			.then((data) => {
+				const apartments = [];
 
-					for (const key in data) {
-						const apartment = {
-							id: key,
-							...data[key],
-						};
+				for (const key in data) {
+					const apartment = {
+						id: key,
+						...data[key],
+					};
 
-						apartments.push(apartment);
-					}
+					apartments.push(apartment);
+				}
 
-					setLoadedApartments(apartments);
-				});
-			setReload(false);
-		}
-	}, [hostid, reload]);
+				setLoadedApartments(apartments);
+			});
+	}, [hostid]);
 
 	return (
 		<section>
