@@ -47,6 +47,10 @@ function MyFavoritePage() {
 						description={apartment.description}
 						pricePerNight={apartment.pricePerNight}
 						loadedUser={userId}
+						loadedApartments={loadedApartments}
+						setLoadedApartments={(apartments) =>
+							setLoadedApartments(apartments)
+						}
 					/>
 				))
 			)}

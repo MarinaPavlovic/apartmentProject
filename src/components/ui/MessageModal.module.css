@@ -9,6 +9,8 @@
     overflow: hidden;
     background-color: white;
     text-align: center;
+    border: 1px solid #42021b;
+
   }
   
   .header {

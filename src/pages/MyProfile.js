@@ -200,6 +200,11 @@ function MyProfilePage() {
 								city={apartment.city}
 								address={apartment.adres}
 								reservationId={apartment.reservationId}
+								apartmentId={apartment.apartmentId}
+								loadedReservations={loadedResApartments}
+								setLoadedReservations={(changedList) =>
+									setLoadedResApartments(changedList)
+								}
 							/>
 						))
 					)}

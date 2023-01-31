@@ -34,7 +34,10 @@ function MyApartmentPage() {
 			{loadedApartments.length === 0 ? (
 				<p>You don't have apartments yet.</p>
 			) : (
-				<ApartmentList apartments={loadedApartments} />
+				<ApartmentList
+					apartments={loadedApartments}
+					setLoadedApartments={(apartments) => setLoadedApartments(apartments)}
+				/>
 			)}
 		</section>
 	);

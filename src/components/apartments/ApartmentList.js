@@ -7,8 +7,10 @@ import ApartmentItemHost from "./ApartmentItemHost";
 function ApartmentList(props) {
 	const authCtx = useContext(AuthContext);
 	const role = authCtx.role;
+	const apartments = props.apartments;
+	const setLoadedApartments = props.setLoadedApartments;
 
-	let content = props.apartments.map((apartment) => (
+	let content = apartments.map((apartment) => (
 		<ApartmentItem
 			key={apartment.id}
 			id={apartment.id}
@@ -37,6 +39,8 @@ function ApartmentList(props) {
 				pricePerNight={apartment.pricePerNight}
 				destinationType={apartment.destinationType}
 				userId={apartment.userId}
+				apartments={props.apartments}
+				setApartments={(apartment) => props.setLoadedApartments(apartment)}
 			/>
 		));
 	}

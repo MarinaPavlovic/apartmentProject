@@ -6,8 +6,10 @@ import Backdrop from "./Beckdrop";
 
 function ApartmentItemFavorite(props) {
 	const [imageNum, setImageNum] = useState(0);
-
 	const [cardIsOpen, setCardIsOpen] = useState(false);
+	const loadedApartments = props.loadedApartments;
+	const setLoadedApartments = props.setLoadedApartments;
+
 	function moreHandler() {
 		setCardIsOpen(true);
 	}
@@ -34,6 +36,12 @@ function ApartmentItemFavorite(props) {
 				console.error("ERROR");
 			}
 		});
+
+		let favoriteApartments = [...loadedApartments];
+		favoriteApartments = favoriteApartments.filter(
+			(apartment) => apartment.id !== apartmentId
+		);
+		setLoadedApartments(favoriteApartments);
 	}
 
 	return (

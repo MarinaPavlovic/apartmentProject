@@ -7,8 +7,9 @@ import DeleteCard from "../ui/DeleteCard";
 function ApartmentItemHost(props) {
 	const [imageNum, setImageNum] = useState(0);
 	const [deleteCard, setDeleteCard] = useState(false);
-
 	const [cardIsOpen, setCardIsOpen] = useState(false);
+	const apartments = props.apartments;
+	const setApartments = props.setApartments;
 	function moreHandler() {
 		setCardIsOpen(true);
 	}
@@ -26,6 +27,12 @@ function ApartmentItemHost(props) {
 				setDeleteCard(false);
 			}
 		});
+
+		let filteredApartments = [...apartments];
+		filteredApartments = filteredApartments.filter(
+			(apartment) => apartment.id !== props.id
+		);
+		setApartments(filteredApartments);
 	}
 
 	return (
